@@ -10,7 +10,7 @@ package model;
  */
 public class Lot {
     private int id;
-    private int prixDepart;
+    private String prixDepart;
     
     private Vente vente;
 
@@ -27,23 +27,25 @@ public class Lot {
         this.id = id;
     }
 
-    public int getPrixDepart() {
+    public String getPrixDepart() {
         return prixDepart;
     }
 
-    public void setPrixDepart(int prixDepart) {
+    public void setPrixDepart(String prixDepart) {
         this.prixDepart = prixDepart;
     }
 
-    
-    
-    
+     
     public Vente getVente() {
         return vente;
     }
 
     public void setVente(Vente vente) {
         this.vente = vente;
+    }
+
+    public String getNom() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
