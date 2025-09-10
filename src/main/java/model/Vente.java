@@ -18,9 +18,8 @@ public class Vente {
     private Lieu lieu; 
     private CategVente categVente;
     
-    private ArrayList<Lot> lesLot ;
-    
-    
+    private ArrayList<Lot> lesLots ;
+
     
 
     public Vente(){
@@ -72,21 +71,19 @@ public class Vente {
         this.categVente = categVente;
     }
 
-    
-    
-    
-    public ArrayList<Lot> getLesLot() {
-        return lesLot;
+    public ArrayList<Lot> getLesLots() {
+        return lesLots;
     }
 
-    public void setLesLot(ArrayList<Lot> lesLot) {
-        this.lesLot = lesLot;
+    public void setLesLot(ArrayList<Lot> lesLots) {
+        this.lesLots = lesLots;
     }
 
-    public Object getLot() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addLot(Lot unLot){
+        if (lesLots ==null ){
+            lesLots= new ArrayList<Lot>();
+        }
+        lesLots.add(unLot);
     }
-    
-    
-    
+
 }
