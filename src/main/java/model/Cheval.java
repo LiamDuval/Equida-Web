@@ -9,6 +9,8 @@ public class Cheval {
     private LocalDate dateNaissance;
 
     private Race race;
+    private Cheval pere;
+    private Cheval mere;
 
     public Cheval() {
     }
@@ -46,5 +48,22 @@ public class Cheval {
 @Override
 public String toString() {
         return id + " " + nom;
+    }
+
+
+ public Cheval getPere() {
+        return pere;
+    }
+
+    public void setPere(Cheval pere) {
+        this.pere = pere;
+    }
+
+    public Cheval getMere() {
+        return mere;
+    }
+
+    public void setMere(Cheval mere) {
+        this.mere = mere;
     }
 }
