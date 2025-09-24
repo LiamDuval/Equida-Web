@@ -42,4 +42,9 @@ public class Cheval {
     public void setRace(Race race) {
         this.race = race;
     }
+    
+@Override
+public String toString() {
+        return id + " " + nom;
+    }
 }

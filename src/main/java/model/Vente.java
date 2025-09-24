@@ -85,5 +85,10 @@ public class Vente {
         }
         lesLots.add(unLot);
     }
+    @Override
+    public String toString() {
+        return id + " " + nom;
+    }
+    
 
 }
