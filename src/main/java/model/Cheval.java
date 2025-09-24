@@ -7,7 +7,6 @@ public class Cheval {
     private int id;
     private String nom;
     private LocalDate dateNaissance;
-
     private Race race;
     private Cheval pere;
     private Cheval mere;
