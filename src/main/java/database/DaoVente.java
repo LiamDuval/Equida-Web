@@ -68,7 +68,7 @@ public class DaoVente {
                 vente.setId(resultatRequete.getInt("v_id"));
                 vente.setNom(resultatRequete.getString("v_nom"));
                 Lieu lieu = new Lieu();
-                lieu.setId(resultatRequete.getInt("v_id"));
+                lieu.setId(resultatRequete.getInt("l_id"));
                 lieu.setVille(resultatRequete.getString("l_ville"));
                 vente.setLieu(lieu);
             }
