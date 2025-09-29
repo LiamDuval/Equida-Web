@@ -13,6 +13,7 @@ public class Lot {
     private String prixDepart;
     
     private Vente vente;
+    private Cheval cheval;
 
     
     public Lot(){
@@ -47,6 +48,17 @@ public class Lot {
     public String getNom() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public Cheval getCheval() {
+        return cheval;
+    }
+
+    public void setCheval(Cheval cheval) {
+        this.cheval = cheval;
+    }
+    
+    
+    
 
     
 }

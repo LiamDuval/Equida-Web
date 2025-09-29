@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Cheval;
 import model.Lieu;
+import model.Lot;
 import model.Vente;
 
 /**
@@ -39,7 +41,7 @@ public class DaoVente {
                 v.setNom(resultatRequete.getString("v_nom"));
                 Lieu l = new Lieu();
                 l.setId(resultatRequete.getInt("l_id"));
-                l.setVille(resultatRequete.getString("l_Ville"));
+                l.setVille(resultatRequete.getString("l_ville"));
                 v.setLieu(l);
                 lesVentes.add(v);
             }
@@ -54,19 +56,26 @@ public class DaoVente {
   public static Vente getLaVente(Connection cnx, int idVente) {
         Vente vente = null;
         try {
-            requeteSql = cnx.prepareStatement(
-                "SELECT v.id as v_id, v.nom as v_nom, " +
-                "l.id as l_id, l.ville as l_ville " +
-                "FROM vente v " +
-                "INNER JOIN lieu l ON v.lieu_id = l.id " +
-                "WHERE v.id = ?"
-            );
+    requeteSql = cnx.prepareStatement(
+        "SELECT v.id AS v_id, v.nom AS v_nom, v.dateDebutVente AS v_dateDebutVente, " +
+        "l.id AS lieu_id, l.ville AS l_ville " +
+        "FROM vente v " +
+        "JOIN lieu l ON v.lieu_id = l.id " +
+        "WHERE v.id = ? " 
+
+    );
+
             requeteSql.setInt(1, idVente);
             resultatRequete = requeteSql.executeQuery();
             if (resultatRequete.next()) {
                 vente = new Vente();
                 vente.setId(resultatRequete.getInt("v_id"));
                 vente.setNom(resultatRequete.getString("v_nom"));
+                java.sql.Date sqlDate = (resultatRequete.getDate("v_dateDebutVente"));
+                vente.setDateDebutVente(sqlDate !=null ? sqlDate.toLocalDate() : null);
+                
+                
+                
                 Lieu lieu = new Lieu();
                 lieu.setId(resultatRequete.getInt("l_id"));
                 lieu.setVille(resultatRequete.getString("l_ville"));
@@ -79,8 +88,6 @@ public class DaoVente {
         return vente;
     }
      
-
-
   public static boolean ajouterVente(Connection cnx, Vente vente) {
     try {
         requeteSql = cnx.prepareStatement(
@@ -119,4 +126,39 @@ public class DaoVente {
 
 
   }
+
+  
+  public static ArrayList<Lot> getLesLots(Connection cnx, int idVente) {
+             ArrayList<Lot> lesLots = new ArrayList<>();
+             String sql = "SELECT l.id AS lot_id, l.prixDepart AS lot_prixDepart, " +
+                          "c.id AS c_id, c.nom AS c_nom " +
+                          "FROM lot l " +
+                          "INNER JOIN cheval c ON l.cheval_id = c.id " +
+                          "WHERE l.vente_id = ? ";
+
+             try (PreparedStatement ps = cnx.prepareStatement(sql)) {
+                 ps.setInt(1, idVente);
+                 try (ResultSet rs = ps.executeQuery()) {
+                     while (rs.next()) {
+                         // Création du cheval
+                         Cheval cheval = new Cheval();
+                         cheval.setId(rs.getInt("c_id"));
+                         cheval.setNom(rs.getString("c_nom"));
+
+                         // Création du lot
+                         Lot lot = new Lot();
+                         lot.setId(rs.getInt("lot_id"));
+                         lot.setPrixDepart(rs.getString("lot_prixDepart"));
+                         lot.setCheval(cheval); // association cheval → lot
+
+                         lesLots.add(lot);
+                     }
+                 }
+             } catch (SQLException e) {
+                 e.printStackTrace();
+                 System.out.println("La requête getLesLots a échoué");
+             }
+             return lesLots;
+         }
+
 }

@@ -9,6 +9,7 @@ public class Cheval {
     private LocalDate dateNaissance;  
     
     private Race race;
+    private Robe robe;
     private Cheval pere;
     private Cheval mere;
 
@@ -44,6 +45,17 @@ public class Cheval {
     public void setRace(Race race) {
         this.race = race;
     }
+
+    public Robe getRobe() {
+        return robe;
+    }
+
+    public void setRobe(Robe robe) {
+        this.robe = robe;
+    }
+    
+    
+    
     
 @Override
 public String toString() {
