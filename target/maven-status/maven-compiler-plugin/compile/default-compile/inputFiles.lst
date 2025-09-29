@@ -1,3 +1,4 @@
+E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\Client.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\database\ConnexionServlet.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\database\DaoCheval.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\database\Connexionbdd.java
@@ -5,12 +6,15 @@ E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\Lot
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\sio\equidaweb\resources\JakartaEE10Resource.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\test\TestConnexionBdd.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\database\DaoRace.java
+E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\database\DaoVente.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\Cheval.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\Lieu.java
+E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\test\testCategVente.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\CategVente.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\test\TestRace.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\test\TestVente.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\Race.java
+E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\servlet\VenteServlet.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\test\TestCheval.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\model\Vente.java
 E:\SIO2\LIAM\B2\SLAM\B2.2-ANN\github\equidaweb25Netbeans\src\main\java\test\TestLieu.java
