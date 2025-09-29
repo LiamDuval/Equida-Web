@@ -13,6 +13,7 @@ model\Enchere.class
 test\testCategVente.class
 database\DaoVente.class
 database\DaoCheval.class
+model\Robe.class
 database\DaoRace.class
 test\TestCheval.class
 model\Lot.class
