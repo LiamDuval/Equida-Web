@@ -4,12 +4,11 @@
  */
 package servlet;
 
-import database.DaoCheval;
-import database.DaoRace;
+
 import database.DaoVente;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,19 +16,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Cheval;
-import model.Race;
+
 import model.Vente;
 
 /**
  *
  * @author sio2
  */
-@WebServlet(name = "venteservlet", urlPatterns = {"/vente-servlet"})
+@WebServlet(name = "venteServlet", urlPatterns = {"/vente-servlet/*"})
 public class VenteServlet extends HttpServlet {
 
 Connection cnx;
@@ -41,7 +39,7 @@ Connection cnx;
         try {
             System.out.println("INIT SERVLET=" + cnx.getSchema());
         } catch (SQLException ex) {
-            Logger.getLogger(ChevalServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VenteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -56,18 +54,18 @@ Connection cnx;
         }
         if ("/show".equals(path)) {
             try {
-                int idVente = Integer.parseInt(request.getParameter("idCheval"));
+                int idVente = Integer.parseInt(request.getParameter("idVente"));
                 Vente laVente = DaoVente.getLaVente(cnx, idVente);
 
                 if (laVente != null) {
                     request.setAttribute("pLaVente", laVente);
                     this.getServletContext().getRequestDispatcher("/WEB-INF/views/vente/show.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/vente-servlet/lister");
+                    response.sendRedirect(request.getContextPath() + "/vente-servlet/list");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Erreur : l'id du vente n'est pas un nombre valide");
-                response.sendRedirect(request.getContextPath() + "/vente-servlet/lister");
+                response.sendRedirect(request.getContextPath() + "/vente-servlet/list");
             }
 
         }
