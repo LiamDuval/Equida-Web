@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.ChevalCourse;
+import model.Course;
 
 public class DaoCheval {
     Connection cnx;
@@ -59,17 +61,23 @@ public class DaoCheval {
         Cheval cheval = null;
         try {
             requeteSql = cnx.prepareStatement(
-                "SELECT c.id as c_id, c.nom as c_nom, " +
-                 "r.id as r_id, r.nom as r_nom, " +
-                 "cpere.nom AS cpere_nom, " +
-                 "cmere.nom AS cmere_nom, " +
-                 "cpere.id AS cpere_id, " +
-                 "cmere.id AS cmere_id " +
-                 "FROM cheval c " +
-                 "INNER JOIN race r ON c.race_id = r.id " +
-                 "LEFT JOIN cheval cpere ON cpere.id = c.pere_id " +
-                 "LEFT JOIN cheval cmere ON cmere.id = c.mere_id " +
-                 "WHERE c.id = ?; "
+                "SELECT c.id as c_id, c.nom as c_nom, \n" +
+"                 r.id as r_id, r.nom as r_nom, \n" +
+"                 cpere.nom AS cpere_nom, \n" +
+"                 cmere.nom AS cmere_nom, \n" +
+"                 cpere.id AS cpere_id, \n" +
+"                 cmere.id AS cmere_id, \n" +
+"                 cc.position AS cc_position,\n" +
+"                 cc.temps AS cc_temps,\n" +
+"                 co.nom AS co_nom,\n" +
+"                 co.ville AS co_ville\n" +
+"                 FROM cheval c \n" +
+"                 INNER JOIN race r ON c.race_id = r.id \n" +
+"                 LEFT JOIN cheval cpere ON cpere.id = c.pere_id \n" +
+"                 LEFT JOIN cheval cmere ON cmere.id = c.mere_id \n" +
+"                 JOIN cheval_course cc ON cc.cheval_id = c.id\n" +
+"                 JOIN course co ON co.id = cc.course_id\n" +
+"                 WHERE c.id = 1;"
             );
             requeteSql.setInt(1, idCheval);
             resultatRequete = requeteSql.executeQuery();
@@ -97,6 +105,20 @@ public class DaoCheval {
                 mere.setNom(resultatRequete.getString("cmere_nom"));
                 cheval.setMere(mere);
                    }
+                
+            if (resultatRequete.getString("co_nom") != null) {
+                Course course = new Course();
+                course.setNom(resultatRequete.getString("co_nom"));
+
+                ChevalCourse chevalCourse = new ChevalCourse();
+                chevalCourse.setPosition(resultatRequete.getInt("cc_position"));
+                chevalCourse.setTemps(resultatRequete.getString("cc_temps"));
+                chevalCourse.setCourse(course);
+                chevalCourse.setCheval(cheval);
+
+                cheval.addChevalCourse(chevalCourse);
+            }
+                
                 }
                 
         } catch (SQLException e) {

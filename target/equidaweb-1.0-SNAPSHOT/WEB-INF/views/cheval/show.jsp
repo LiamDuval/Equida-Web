@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="model.Cheval" %>
+<%@ page import="model.ChevalCourse" %>
 
 <!DOCTYPE html>
 <html>
@@ -80,31 +81,66 @@
                                     <%= leCheval.getRace() != null ? leCheval.getRace().getNom() : "Non renseignée" %>
                                 </div>
                             </div>
-                                
-                            <div class="row detail-row">
-                                <div class="col-sm-3 detail-label">Pere</div>
-                                <div class="col-sm-9 detail-value"> 
-                                    <a href="<%= request.getContextPath() %>/cheval-servlet/show?idCheval=<%= leCheval.getPere().getId() %>">
-                                    <%= leCheval.getPere().getNom() %></a>
 
+                            <!-- 👇 Partie ajoutée pour afficher le père -->
+                            <div class="row detail-row">
+                                <div class="col-sm-3 detail-label">Père</div>
+                                <div class="col-sm-9 detail-value">
+                                    <% if (leCheval.getPere() != null) { %>
+                                        <a href="<%= request.getContextPath() %>/cheval-servlet/show?idCheval=<%= leCheval.getPere().getId() %>">
+                                            <%= leCheval.getPere().getNom() %>
+                                        </a>
+                                    <% } else { %>
+                                        Non renseigné
+                                    <% } %>
+                                </div>
+                            </div>
+
+                            <!-- 👇 Partie ajoutée pour afficher la mère -->
+                            <div class="row detail-row">
+                                <div class="col-sm-3 detail-label">Mère</div>
+                                <div class="col-sm-9 detail-value">
+                                    <% if (leCheval.getMere() != null) { %>
+                                        <a href="<%= request.getContextPath() %>/cheval-servlet/show?idCheval=<%= leCheval.getMere().getId() %>">
+                                            <%= leCheval.getMere().getNom() %>r
+                                        </a>
+                                    <% } else { %>
+                                        Non renseigné
+                                    <% } %>
                                 </div>
                             </div>
                                 
-                            <div class="row detail-row">
-                                <div class="col-sm-3 detail-label">Mere</div>
-                                <div class="col-sm-9 detail-value">
-                                                                     
-                                    <a href="<%= request.getContextPath() %>/cheval-servlet/show?idCheval=<%= leCheval.getMere().getId() %>">
-                                        <%= leCheval.getMere().getNom() %></a>
-                                </div>
-                            </div>                                
+                            <!-- 👇 Partie ajoutée pour afficher les participations -->
+                            <h3 style="margin-top:30px;">Participations aux courses</h3>
+                            <% if (leCheval.getLesChevauxCourses() != null && !leCheval.getLesChevauxCourses().isEmpty()) { %>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Course</th>
+                                            <th>Position</th>
+                                            <th>Temps</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (ChevalCourse cc : leCheval.getLesChevauxCourses()) { %>
+                                            <tr>
+                                                <td><%= cc.getCourse() != null ? cc.getCourse().getNom() : "Non renseignée" %></td>
+                                                <td><%= cc.getPosition() > 0 ? cc.getPosition() : "Non renseignée" %></td>
+                                                <td><%= cc.getTemps() != null && !cc.getTemps().isEmpty() ? cc.getTemps() : "Non renseigné" %></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            <% } else { %>
+                                <p>Aucune participation enregistrée pour ce cheval.</p>
+                            <% } %>
+                                
 
                             <div class="row" style="margin-top: 30px;">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <a href="<%= request.getContextPath() %>/cheval-servlet/list" class="btn btn-default">
                                         <span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste
                                     </a>
-                                    <!-- Vous pouvez ajouter d'autres boutons ici, comme Modifier ou Supprimer -->
                                 </div>
                             </div>
                         <% } else { %>
@@ -115,6 +151,7 @@
                                 <span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste
                             </a>
                         <% } %>
+                        
                     </div>
                 </div>
             </div>
