@@ -63,6 +63,7 @@ public class DaoCheval {
             requeteSql = cnx.prepareStatement(
                 "SELECT c.id as c_id, c.nom as c_nom, \n" +
 "                 r.id as r_id, r.nom as r_nom, \n" +
+"                 c.date_naissance AS c_dateNaissance, \n" +
 "                 cpere.nom AS cpere_nom, \n" +
 "                 cmere.nom AS cmere_nom, \n" +
 "                 cpere.id AS cpere_id, \n" +
@@ -85,6 +86,7 @@ public class DaoCheval {
                 cheval = new Cheval();
                 cheval.setId(resultatRequete.getInt("c_id"));
                 cheval.setNom(resultatRequete.getString("c_nom"));
+                cheval.setDateNaissance(resultatRequete.getDate("c_dateNaissance").toLocalDate());
                 Race race = new Race();
                 race.setId(resultatRequete.getInt("r_id"));
                 race.setNom(resultatRequete.getString("r_nom"));
