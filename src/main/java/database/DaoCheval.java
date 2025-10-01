@@ -59,14 +59,17 @@ public class DaoCheval {
         Cheval cheval = null;
         try {
             requeteSql = cnx.prepareStatement(
-                "SELECT c.id as c_id, c.nom as c_nom," +
-"                r.id as r_id, r.nom as r_nom," +
-"                cpere.nom AS cpere_nom," +
-"                cpere.id AS cpere_id" +
-"                FROM cheval c " +
-"                INNER JOIN race r ON c.race_id = r.id" +
-"                LEFT JOIN cheval cpere ON cpere.id = c.pere_id" +
-"                WHERE c.id = ?;"
+                "SELECT c.id as c_id, c.nom as c_nom, " +
+                 "r.id as r_id, r.nom as r_nom, " +
+                 "cpere.nom AS cpere_nom, " +
+                 "cmere.nom AS cmere_nom, " +
+                 "cpere.id AS cpere_id, " +
+                 "cmere.id AS cmere_id " +
+                 "FROM cheval c " +
+                 "INNER JOIN race r ON c.race_id = r.id " +
+                 "LEFT JOIN cheval cpere ON cpere.id = c.pere_id " +
+                 "LEFT JOIN cheval cmere ON cmere.id = c.mere_id " +
+                 "WHERE c.id = ?; "
             );
             requeteSql.setInt(1, idCheval);
             resultatRequete = requeteSql.executeQuery();
@@ -85,6 +88,14 @@ public class DaoCheval {
                 pere.setId(idPere);
                 pere.setNom(resultatRequete.getString("cpere_nom"));
                 cheval.setPere(pere);
+                   }
+                
+                int idMere =resultatRequete.getInt("cmere_id");
+                if (idMere != 0) { 
+                Cheval mere = new Cheval();
+                mere.setId(idMere);
+                mere.setNom(resultatRequete.getString("cmere_nom"));
+                cheval.setMere(mere);
                    }
                 }
                 
