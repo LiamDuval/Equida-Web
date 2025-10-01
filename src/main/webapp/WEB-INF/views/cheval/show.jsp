@@ -54,6 +54,7 @@
                     <div class="form-container">
                         <% 
                             Cheval leCheval = (Cheval)request.getAttribute("pLeCheval");
+                            java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
                             if(leCheval != null) {
                         %>
                             <h2>Détails du cheval : <%= leCheval.getNom() %></h2>
@@ -71,7 +72,7 @@
                             <div class="row detail-row">
                                 <div class="col-sm-3 detail-label">Date de naissance</div>
                                 <div class="col-sm-9 detail-value">
-                                    <%= leCheval.getDateNaissance() != null ? leCheval.getDateNaissance() : "Non renseignée" %>
+                                    <%= leCheval.getDateNaissance() != null ? leCheval.getDateNaissance().format(formatter) : "Non renseignée" %>
                                 </div>
                             </div>
 
