@@ -80,6 +80,13 @@
                                     <%= leCheval.getRace() != null ? leCheval.getRace().getNom() : "Non renseignée" %>
                                 </div>
                             </div>
+                                
+                            <div class="row detail-row">
+                                <div class="col-sm-3 detail-label">Pere</div>
+                                <div class="col-sm-9 detail-value">
+                                    <%= leCheval.getPere() != null ? leCheval.getPere().getNom() : "Non renseignée" %>
+                                </div>
+                            </div>
 
                             <div class="row" style="margin-top: 30px;">
                                 <div class="col-sm-offset-3 col-sm-9">
