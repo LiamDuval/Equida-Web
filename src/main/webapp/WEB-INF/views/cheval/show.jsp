@@ -83,10 +83,21 @@
                                 
                             <div class="row detail-row">
                                 <div class="col-sm-3 detail-label">Pere</div>
-                                <div class="col-sm-9 detail-value">
-                                    <%= leCheval.getPere() != null ? leCheval.getPere().getNom() : "Non renseignée" %>
+                                <div class="col-sm-9 detail-value"> 
+                                    <a href="<%= request.getContextPath() %>/cheval-servlet/show?idCheval=<%= leCheval.getPere().getId() %>">
+                                    <%= leCheval.getPere().getNom() %></a>
+
                                 </div>
                             </div>
+                                
+                            <div class="row detail-row">
+                                <div class="col-sm-3 detail-label">Mere</div>
+                                <div class="col-sm-9 detail-value">
+                                                                     
+                                    <a href="<%= request.getContextPath() %>/cheval-servlet/show?idCheval=<%= leCheval.getMere().getId() %>">
+                                        <%= leCheval.getMere().getNom() %></a>
+                                </div>
+                            </div>                                
 
                             <div class="row" style="margin-top: 30px;">
                                 <div class="col-sm-offset-3 col-sm-9">
