@@ -58,7 +58,7 @@ public class DaoVente {
         try {
     requeteSql = cnx.prepareStatement(
         "SELECT v.id AS v_id, v.nom AS v_nom, v.dateDebutVente AS v_dateDebutVente, " +
-        "l.id AS lieu_id, l.ville AS l_ville " +
+        "l.id AS l_id, l.ville AS l_ville " +
         "FROM vente v " +
         "JOIN lieu l ON v.lieu_id = l.id " +
         "WHERE v.id = ? " 

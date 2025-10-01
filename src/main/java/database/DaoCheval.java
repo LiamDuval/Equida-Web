@@ -24,7 +24,7 @@ public class DaoCheval {
         ArrayList<Cheval> lesChevaux = new ArrayList<Cheval>();
         try {
             requeteSql = cnx.prepareStatement(
-                "SELECT c.id as c_id, c.nom as c_nom, c.date_naissance AS c_dateNaissance  " +
+                "SELECT c.id as c_id, c.nom as c_nom, c.date_naissance AS c_dateNaissance,  " +
                 "r.id as r_id, r.nom as r_nom " +
                 "FROM cheval c " +
                 "INNER JOIN race r ON c.race_id = r.id"
@@ -59,11 +59,14 @@ public class DaoCheval {
         Cheval cheval = null;
         try {
             requeteSql = cnx.prepareStatement(
-                "SELECT c.id as c_id, c.nom as c_nom, " +
-                "r.id as r_id, r.nom as r_nom " +
-                "FROM cheval c " +
-                "INNER JOIN race r ON c.race_id = r.id " +
-                "WHERE c.id = ?"
+                "SELECT c.id as c_id, c.nom as c_nom," +
+"                r.id as r_id, r.nom as r_nom," +
+"                cpere.nom AS cpere_nom," +
+"                cpere.id AS cpere_id" +
+"                FROM cheval c " +
+"                INNER JOIN race r ON c.race_id = r.id" +
+"                LEFT JOIN cheval cpere ON cpere.id = c.pere_id" +
+"                WHERE c.id = ?;"
             );
             requeteSql.setInt(1, idCheval);
             resultatRequete = requeteSql.executeQuery();
@@ -75,7 +78,16 @@ public class DaoCheval {
                 race.setId(resultatRequete.getInt("r_id"));
                 race.setNom(resultatRequete.getString("r_nom"));
                 cheval.setRace(race);
-            }
+                
+                int idPere =resultatRequete.getInt("cpere_id");
+                if (idPere != 0) { 
+                Cheval pere = new Cheval();
+                pere.setId(idPere);
+                pere.setNom(resultatRequete.getString("cpere_nom"));
+                cheval.setPere(pere);
+                   }
+                }
+                
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("La requête de getLeCheval a généré une exception SQL");
